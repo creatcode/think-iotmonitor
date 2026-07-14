@@ -1,6 +1,6 @@
 <?php
 
-namespace CreatCode\IotMonitor\Composer;
+namespace CreatCode\ThinkIotMonitor\Composer;
 
 class ConfigPublisher
 {
@@ -63,42 +63,6 @@ class ConfigPublisher
         }
 
         return $target;
-    }
-
-    /** 删除旧版本写入的 TP5 路由行为，避免升级后遗留无效类引用。 */
-    public static function removeTp5RouteBehavior(string $projectRoot): ?string
-    {
-        $projectRoot = rtrim($projectRoot, '/\\');
-        $package = self::rootPackage($projectRoot);
-        $appPath = self::appPath($package);
-        $tagsFile = $projectRoot . DIRECTORY_SEPARATOR . $appPath . DIRECTORY_SEPARATOR . 'tags.php';
-        if (!self::isTp5($projectRoot, $package, $tagsFile) || !is_file($tagsFile)) {
-            return null;
-        }
-
-        $content = (string) file_get_contents($tagsFile);
-        $lineEnding = strpos($content, "\r\n") !== false ? "\r\n" : "\n";
-        $lines = explode($lineEnding, $content);
-        $updatedLines = array();
-        $removed = false;
-        foreach ($lines as $line) {
-            if (strpos($line, 'CreatCode\\IotMonitor\\Http\\Tp5RouteBehavior') !== false) {
-                $removed = true;
-                continue;
-            }
-            $updatedLines[] = $line;
-        }
-        if (!$removed) {
-            return null;
-        }
-
-        $updated = implode($lineEnding, $updatedLines);
-
-        if (file_put_contents($tagsFile, $updated) === false) {
-            throw new \RuntimeException('Unable to remove ThinkPHP 5 route behavior: ' . $tagsFile);
-        }
-
-        return $tagsFile;
     }
 
     /** 发布无路由依赖的独立监控入口。 */
@@ -169,11 +133,6 @@ class ConfigPublisher
             $removed[] = $assets;
         }
 
-        $tagsFile = self::removeTp5RouteBehavior($projectRoot);
-        if ($tagsFile !== null) {
-            $removed[] = $tagsFile;
-        }
-
         return $removed;
     }
 
@@ -188,7 +147,7 @@ define('APP_PATH', __DIR__ . '/../__IOTMONITOR_APP_PATH__/');
 require __DIR__ . '/../thinkphp/base.php';
 
 \think\App::initCommon();
-$controller = new \CreatCode\IotMonitor\Http\MonitorController();
+$controller = new \CreatCode\ThinkIotMonitor\Http\MonitorController();
 $path = trim(isset($_SERVER['PATH_INFO']) ? (string) $_SERVER['PATH_INFO'] : '', '/');
 $response = $path === 'overview' ? $controller->overview() : $controller->index();
 
@@ -229,7 +188,7 @@ if (!is_string($bootstrap) || !is_file($bootstrap)) {
 }
 
 require $bootstrap;
-$controller = new \CreatCode\IotMonitor\Http\MonitorController();
+$controller = new \CreatCode\ThinkIotMonitor\Http\MonitorController();
 $path = trim(isset($_SERVER['PATH_INFO']) ? (string) $_SERVER['PATH_INFO'] : '', '/');
 $response = $path === 'overview' ? $controller->overview() : $controller->index();
 

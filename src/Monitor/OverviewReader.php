@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor\Monitor;
+namespace CreatCode\ThinkIotMonitor\Monitor;
 
-use CreatCode\IotMonitor\ManagerHelper;
-use CreatCode\IotMonitor\RedisManager;
-use CreatCode\IotMonitor\TrafficMonitor;
-use CreatCode\IotMonitor\TrafficReader;
+use CreatCode\ThinkIotMonitor\ManagerHelper;
+use CreatCode\ThinkIotMonitor\RedisManager;
+use CreatCode\ThinkIotMonitor\TrafficMonitor;
+use CreatCode\ThinkIotMonitor\TrafficReader;
 
 class OverviewReader
 {

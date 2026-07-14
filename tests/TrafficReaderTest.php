@@ -2,8 +2,8 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use CreatCode\IotMonitor\StoreInterface;
-use CreatCode\IotMonitor\TrafficReader;
+use CreatCode\ThinkIotMonitor\StoreInterface;
+use CreatCode\ThinkIotMonitor\TrafficReader;
 
 $store = new class implements StoreInterface {
     public function incrementMinute(string $minute, array $fields, int $ttl): void

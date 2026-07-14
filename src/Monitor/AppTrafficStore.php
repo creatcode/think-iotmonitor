@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor\Monitor;
+namespace CreatCode\ThinkIotMonitor\Monitor;
 
-use CreatCode\IotMonitor\RedisManager;
-use CreatCode\IotMonitor\StoreInterface;
+use CreatCode\ThinkIotMonitor\RedisManager;
+use CreatCode\ThinkIotMonitor\StoreInterface;
 
 /**
  * 使用 Redis Hash 保存分钟流量统计。

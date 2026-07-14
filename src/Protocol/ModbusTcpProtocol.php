@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor\Protocol;
+namespace CreatCode\ThinkIotMonitor\Protocol;
 
 use Workerman\Connection\ConnectionInterface;
 

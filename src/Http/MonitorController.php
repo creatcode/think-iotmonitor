@@ -1,8 +1,8 @@
 <?php
 
-namespace CreatCode\IotMonitor\Http;
+namespace CreatCode\ThinkIotMonitor\Http;
 
-use CreatCode\IotMonitor\Monitor\OverviewReader;
+use CreatCode\ThinkIotMonitor\Monitor\OverviewReader;
 
 class MonitorController
 {

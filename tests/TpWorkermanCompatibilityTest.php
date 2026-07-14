@@ -2,15 +2,15 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use CreatCode\IotMonitor\Monitor\OverviewReader;
-use CreatCode\IotMonitor\Monitor\WorkermanMonitorBootstrap;
-use CreatCode\IotMonitor\Protocol\ModbusRtuProtocol;
+use CreatCode\ThinkIotMonitor\Monitor\OverviewReader;
+use CreatCode\ThinkIotMonitor\Monitor\WorkermanMonitorBootstrap;
+use CreatCode\ThinkIotMonitor\Protocol\ModbusRtuProtocol;
 
 if (!class_exists(WorkermanMonitorBootstrap::class)) {
     throw new RuntimeException('Workerman monitor bootstrap is unavailable.');
 }
 
-if (class_exists('CreatCode\\IotMonitor\\Runtime\\WebmanAdapter')) {
+if (class_exists('CreatCode\\ThinkIotMonitor\\Runtime\\WebmanAdapter')) {
     throw new RuntimeException('Webman runtime adapter must not be included in the ThinkPHP package.');
 }
 
@@ -25,6 +25,14 @@ if (ModbusRtuProtocol::crc16Modbus("\x01\x03\x00\x00\x00\x0A") !== 0xCDC5) {
 $composer = json_decode(file_get_contents(dirname(__DIR__) . '/composer.json'), true);
 if (($composer['name'] ?? null) !== 'creatcode/think-iotmonitor') {
     throw new RuntimeException('Composer package name must be creatcode/think-iotmonitor.');
+}
+
+if (($composer['autoload']['psr-4']['CreatCode\\ThinkIotMonitor\\'] ?? null) !== 'src/') {
+    throw new RuntimeException('Composer PSR-4 namespace must be CreatCode\\ThinkIotMonitor\\.');
+}
+
+if (($composer['extra']['class'] ?? null) !== 'CreatCode\\ThinkIotMonitor\\Composer\\Plugin') {
+    throw new RuntimeException('Composer plugin class must use the current namespace.');
 }
 
 if (stripos(json_encode($composer), 'webman') !== false) {

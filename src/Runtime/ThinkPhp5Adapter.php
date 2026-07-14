@@ -1,8 +1,8 @@
 <?php
 
-namespace CreatCode\IotMonitor\Runtime;
+namespace CreatCode\ThinkIotMonitor\Runtime;
 
-use CreatCode\IotMonitor\Contracts\RuntimeAdapterInterface;
+use CreatCode\ThinkIotMonitor\Contracts\RuntimeAdapterInterface;
 
 class ThinkPhp5Adapter implements RuntimeAdapterInterface
 {

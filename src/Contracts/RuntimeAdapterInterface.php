@@ -1,6 +1,6 @@
 <?php
 
-namespace CreatCode\IotMonitor\Contracts;
+namespace CreatCode\ThinkIotMonitor\Contracts;
 
 interface RuntimeAdapterInterface
 {

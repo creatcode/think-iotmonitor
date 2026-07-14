@@ -1,8 +1,8 @@
 <?php
 
-namespace CreatCode\IotMonitor;
+namespace CreatCode\ThinkIotMonitor;
 
-use CreatCode\IotMonitor\Runtime\Runtime;
+use CreatCode\ThinkIotMonitor\Runtime\Runtime;
 
 class ManagerHelper
 {

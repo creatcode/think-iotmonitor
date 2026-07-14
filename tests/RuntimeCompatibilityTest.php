@@ -2,8 +2,8 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use CreatCode\IotMonitor\Runtime\Runtime;
-use CreatCode\IotMonitor\Runtime\ThinkPhp5Adapter;
+use CreatCode\ThinkIotMonitor\Runtime\Runtime;
+use CreatCode\ThinkIotMonitor\Runtime\ThinkPhp5Adapter;
 
 Runtime::setAdapter(new ThinkPhp5Adapter(function () {
     return new class {

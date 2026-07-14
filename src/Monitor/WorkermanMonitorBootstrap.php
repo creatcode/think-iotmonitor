@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor\Monitor;
+namespace CreatCode\ThinkIotMonitor\Monitor;
 
-use CreatCode\IotMonitor\ManagerHelper;
-use CreatCode\IotMonitor\TrafficMonitor;
+use CreatCode\ThinkIotMonitor\ManagerHelper;
+use CreatCode\ThinkIotMonitor\TrafficMonitor;
 
 /**
  * ThinkPHP 与 Workerman TCP 进程共用的流量监控启动器。

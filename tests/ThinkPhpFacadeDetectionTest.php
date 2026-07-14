@@ -45,8 +45,8 @@ namespace {
 
     require dirname(__DIR__) . '/vendor/autoload.php';
 
-    use CreatCode\IotMonitor\Runtime\Runtime;
-    use CreatCode\IotMonitor\Runtime\ThinkPhpFacadeAdapter;
+    use CreatCode\ThinkIotMonitor\Runtime\Runtime;
+    use CreatCode\ThinkIotMonitor\Runtime\ThinkPhpFacadeAdapter;
 
     Runtime::boot();
 

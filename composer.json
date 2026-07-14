@@ -4,21 +4,21 @@
   "type": "composer-plugin",
   "license": "MIT",
   "require": {
-    "php": ">=7.2",
+    "php": "^7.2 || ^8.0",
     "ext-redis": "*",
-    "composer-plugin-api": ">=1.1",
-    "topthink/framework": ">=5.0 || dev-master",
-    "workerman/workerman": ">=4.0"
+    "composer-plugin-api": "^1.1 || ^2.0",
+    "topthink/framework": "^5.0 || ^6.0 || ^7.0 || ^8.0 || dev-master",
+    "workerman/workerman": "^4.0 || ^5.0"
   },
   "suggest": {
     "topthink/think-orm": "Enables ThinkPHP 6, 7 and 8 database facade integration."
   },
   "autoload": {
     "psr-4": {
-      "CreatCode\\IotMonitor\\": "src/"
+      "CreatCode\\ThinkIotMonitor\\": "src/"
     }
   },
   "extra": {
-    "class": "CreatCode\\IotMonitor\\Composer\\Plugin"
+    "class": "CreatCode\\ThinkIotMonitor\\Composer\\Plugin"
   }
 }

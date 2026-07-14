@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor;
+namespace CreatCode\ThinkIotMonitor;
 
 use Workerman\Timer;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace CreatCode\IotMonitor\Composer;
+namespace CreatCode\ThinkIotMonitor\Composer;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
@@ -82,7 +82,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         $projectRoot = dirname($vendorDirectory);
         $target = ConfigPublisher::publish($projectRoot, $sourceFile);
         $assets = ConfigPublisher::publishAssets($projectRoot, $installPath . DIRECTORY_SEPARATOR . 'src' . DIRECTORY_SEPARATOR . 'Http' . DIRECTORY_SEPARATOR . 'resources' . DIRECTORY_SEPARATOR . 'assets');
-        $removedTags = ConfigPublisher::removeTp5RouteBehavior($projectRoot);
         $entry = ConfigPublisher::publishHttpEntry($projectRoot);
 
         if ($target !== null) {
@@ -90,9 +89,6 @@ class Plugin implements PluginInterface, EventSubscriberInterface
         }
         if ($assets !== null) {
             $this->io->write('<info>Published Think IoT Monitor assets: ' . $assets . '</info>');
-        }
-        if ($removedTags !== null) {
-            $this->io->write('<info>Removed obsolete Think IoT Monitor route behavior from: ' . $removedTags . '</info>');
         }
         if ($entry !== null) {
             $this->io->write('<info>Published Think IoT Monitor entry: ' . $entry . '</info>');

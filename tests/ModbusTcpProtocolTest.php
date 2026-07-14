@@ -2,7 +2,7 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use CreatCode\IotMonitor\Protocol\ModbusTcpProtocol;
+use CreatCode\ThinkIotMonitor\Protocol\ModbusTcpProtocol;
 
 $frame = "\x00\x01\x00\x00\x00\x06\x01\x03\x00\x00\x00\x01";
 

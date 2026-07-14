@@ -1,8 +1,8 @@
 <?php
 
-namespace CreatCode\IotMonitor\Runtime;
+namespace CreatCode\ThinkIotMonitor\Runtime;
 
-use CreatCode\IotMonitor\Contracts\RuntimeAdapterInterface;
+use CreatCode\ThinkIotMonitor\Contracts\RuntimeAdapterInterface;
 
 /**
  * ThinkPHP 6、8 的 Facade 运行时适配器。

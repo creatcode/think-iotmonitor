@@ -6,8 +6,8 @@ $projectRoot = dirname(__DIR__, 2) . '/iotadmin-new';
 define('APP_PATH', $projectRoot . '/application/');
 require $projectRoot . '/thinkphp/base.php';
 
-use CreatCode\IotMonitor\Runtime\Runtime;
-use CreatCode\IotMonitor\Runtime\ThinkPhp5Adapter;
+use CreatCode\ThinkIotMonitor\Runtime\Runtime;
+use CreatCode\ThinkIotMonitor\Runtime\ThinkPhp5Adapter;
 
 Runtime::boot();
 

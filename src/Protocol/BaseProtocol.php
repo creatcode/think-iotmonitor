@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor\Protocol;
+namespace CreatCode\ThinkIotMonitor\Protocol;
 
-use CreatCode\IotMonitor\ManagerHelper;
-use CreatCode\IotMonitor\TrafficMonitor;
+use CreatCode\ThinkIotMonitor\ManagerHelper;
+use CreatCode\ThinkIotMonitor\TrafficMonitor;
 use Workerman\Connection\ConnectionInterface;
 
 /**

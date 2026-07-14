@@ -2,8 +2,8 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use CreatCode\IotMonitor\StoreInterface;
-use CreatCode\IotMonitor\TrafficMonitor;
+use CreatCode\ThinkIotMonitor\StoreInterface;
+use CreatCode\ThinkIotMonitor\TrafficMonitor;
 
 $store = new class implements StoreInterface {
     public $writes = array();

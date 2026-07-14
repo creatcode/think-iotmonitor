@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor;
+namespace CreatCode\ThinkIotMonitor;
 
 /**
  * 按分钟存储聚合流量窗口。

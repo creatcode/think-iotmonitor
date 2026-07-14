@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CreatCode\IotMonitor;
+namespace CreatCode\ThinkIotMonitor;
 
 /**
  * 分钟流量统计的存储抽象。

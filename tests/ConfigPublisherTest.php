@@ -2,7 +2,7 @@
 
 require dirname(__DIR__) . '/vendor/autoload.php';
 
-use CreatCode\IotMonitor\Composer\ConfigPublisher;
+use CreatCode\ThinkIotMonitor\Composer\ConfigPublisher;
 
 $source = dirname(__DIR__) . '/src/config/iotmonitor.php';
 $root = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'think-iotmonitor-' . uniqid('', true);
@@ -31,11 +31,6 @@ try {
         throw new RuntimeException('Existing ThinkPHP 5 configuration was overwritten.');
     }
 
-    file_put_contents($root . DIRECTORY_SEPARATOR . 'application' . DIRECTORY_SEPARATOR . 'tags.php', "<?php\nreturn ['app_init' => ['CreatCode\\IotMonitor\\Http\\Tp5RouteBehavior']];\n");
-    $tagsPath = ConfigPublisher::removeTp5RouteBehavior($root);
-    if ($tagsPath === null || strpos((string) file_get_contents($tagsPath), 'Tp5RouteBehavior') !== false) {
-        throw new RuntimeException('Obsolete ThinkPHP 5 route behavior was not removed.');
-    }
     $entryPath = ConfigPublisher::publishHttpEntry($root);
     if ($entryPath !== $root . DIRECTORY_SEPARATOR . 'public' . DIRECTORY_SEPARATOR . 'iotmonitor.php' || !is_file($entryPath) || strpos((string) file_get_contents($entryPath), 'MonitorController') === false) {
         throw new RuntimeException('ThinkPHP 5 monitor entry was not published to public/iotmonitor.php.');
