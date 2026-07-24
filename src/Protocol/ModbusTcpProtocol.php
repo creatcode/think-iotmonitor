@@ -6,48 +6,87 @@ namespace CreatCode\ThinkIotMonitor\Protocol;
 
 use Workerman\Connection\ConnectionInterface;
 
+/**
+ * Modbus TCP 网络协议。
+ */
 class ModbusTcpProtocol extends BaseProtocol
 {
     const PROTOCOL_NAME = 'mtcp';
 
-    public static function input($buffer, ConnectionInterface $connection)
+    /**
+     * 检查数据包完整性。
+     *
+     * @param string $buffer
+     * @param ConnectionInterface $connection
+     * @return int
+     */
+    protected static function inputPayload($buffer, ConnectionInterface $connection)
     {
-        $receivedLength = strlen($buffer);
-        if ($receivedLength < 4) {
+        $recvLen = strlen($buffer);
+        if ($recvLen < 4) {
             return 0;
         }
 
-        $extraLength = static::extraPacketLength(substr($buffer, 0, 4));
-        if ($extraLength === null) {
-            if ($receivedLength < 6) {
+        $ascTag = substr($buffer, 0, 4);
+        $extraLength = static::extraPacketLength($ascTag);
+
+        if ($extraLength !== null) {
+            $frameLength = $extraLength;
+        } else {
+            if ($recvLen < 6) {
                 return 0;
             }
             $frameLength = self::getFrameLength($buffer);
             if ($frameLength === -1) {
                 return self::closeInvalidConnection($connection);
             }
-        } else {
-            $frameLength = $extraLength;
         }
 
-        return $receivedLength < $frameLength ? 0 : $frameLength;
+        if ($recvLen < $frameLength) {
+            return 0;
+        }
+
+        return $frameLength;
     }
 
+    /**
+     * 请求数据解包。
+     *
+     * @param string $buffer
+     * @return array
+     */
     protected static function decodePayload($buffer): array
     {
         $tag = substr($buffer, 0, 4);
-        $type = static::extraPacketLength($tag) === null ? 'report' : $tag;
-        $data = $type === 'report' ? bin2hex($buffer) : $buffer;
-        $protocol = static::protocolName();
-        return compact('type', 'data', 'protocol');
+        $type = 'report';
+        $data = bin2hex($buffer);
+
+        if (static::extraPacketLength($tag) !== null) {
+            $type = $tag;
+            $data = $buffer;
+        }
+
+        return compact('type', 'data');
     }
 
+    /**
+     * 获取协议包长度。
+     *
+     * @param string $binaryData
+     * @return int
+     */
     public static function getFrameLength($binaryData)
     {
+        // 协议标识符必须为 0x0000。
         if ($binaryData[2] !== "\x00" || $binaryData[3] !== "\x00") {
             return -1;
         }
+
         $length = (ord($binaryData[4]) << 8) | ord($binaryData[5]);
-        return $length < 2 || $length > 254 ? -1 : 6 + $length;
+        if ($length < 2 || $length > 254) {
+            return -1;
+        }
+
+        return 6 + $length;
     }
 }
